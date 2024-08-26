@@ -47,6 +47,7 @@ const SocialMediaIcons = () => {
             width={24}
             height={24}
             className="w-3 h-3 md:w-8 md:h-8"
+            priority
           />
         </Link>
       ))}

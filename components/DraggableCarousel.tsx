@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { CarouselImage1, CarouselImage2, CarouselImage3, CarouselImage4, CarouselImage5 } from "@/utils";
 
 const imgs = [
-  "/images/Image1.svg",
-  "/images/Image2.svg",
-  "/images/Image3.svg",
-  "/images/Image4.svg",
-  "/images/Image5.svg",
+  CarouselImage1,
+  CarouselImage2,
+  CarouselImage3,
+  CarouselImage4,
+  CarouselImage5
 ];
 
-const FullScreenCarousel: React.FC = () => {
+const DraggableCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -45,7 +46,7 @@ const FullScreenCarousel: React.FC = () => {
               width={1280}
               height={570}
               className=" w-full h-full "
-              priority={index === currentIndex}
+              priority
             />
           </div>
         ))}
@@ -112,4 +113,4 @@ const FullScreenCarousel: React.FC = () => {
   );
 };
 
-export default FullScreenCarousel;
+export default DraggableCarousel;

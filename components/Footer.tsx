@@ -2,7 +2,7 @@ import { kequelFooter, Logo } from "@/utils";
 import Image from "next/image";
 import SocialMediaIcons from "./ui/SocialMediaIcons";
 
-const Footer = () => {
+const  Footer = () => {
   return (
     <footer className="bg-black md:p-8 p-4 w-full flex items-center justify-between ">
       <Image

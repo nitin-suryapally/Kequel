@@ -4,8 +4,6 @@ import localFonts from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import StairTransition from "@/components/StairTransition";
-import PageTransition from "@/components/PageTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,8 +41,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.variable}>
         <Navbar />
-        <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        {children}
         <Footer />
       </body>
     </html>

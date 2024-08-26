@@ -1,14 +1,7 @@
 "use client";
 import { product, ProductImage } from "@/utils";
 import Image from "next/image";
-import React, { useState, Suspense } from "react";
-
-// Loading spinner component
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center h-full">
-    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-black"></div>
-  </div>
-);
+import React, { useState } from "react";
 
 const Products = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,21 +21,19 @@ const Products = () => {
       </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between">
-        <div className="w-full md:w-1/2 flex justify-center relative">
-          <Suspense fallback={<LoadingSpinner />}>
-            <Image
-              src={ProductImage}
-              alt="Compact Kequel Bedside Table"
-              priority
-              width={580}
-              height={580}
-              className="w-full max-w-xs md:max-w-md object-contain"
-            />
-          </Suspense>
+        <div className="w-full md:w-1/2 flex justify-center">
+          <Image
+            src={ProductImage}
+            alt="Compact Kequel Bedside Table"
+            priority
+            width={580}
+            height={580}
+            className="w-full max-w-xs md:max-w-md object-contain"
+          />
         </div>
 
         <div className="w-full md:w-1/2 px-4 md:px-8 mt-6 md:mt-0 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 font-primary">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 font-primary ">
             Compact Kequel Bedside Table
           </h2>
           <p className="text-base md:text-lg text-[#1D1D1F] mb-6 font-normal font-primary">
@@ -73,32 +64,30 @@ const Products = () => {
       {isExpanded && (
         <div className="max-w-7xl w-full content-center mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
           {product.map((variant, index) => (
-            <div key={index} className="flex flex-col w-full space-y-4">
-              <div className="flex flex-col items-center gap-4">
+            <div
+              key={index}
+              className="flex flex-col w-full space-y-4"
+            >
+              <div className="flex flex-col items-center gap-4 ">
                 <h3 className="mt-4 text-lg md:text-xl lg:text-3xl font-medium font-secondary text-center">
                   {variant.name}
                 </h3>
-                <div className="w-[300px] h-[250px] flex justify-center items-center relative">
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Image
-                      src={variant.image}
-                      alt={variant.name}
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                      priority
-                    />
-                  </Suspense>
+                <div className="w-[300px] h-[250px] flex justify-center items-center">
+                  <Image
+                    src={variant.image}
+                    alt={variant.name}
+                    width={200}
+                    height={200}
+                    className="object-contain"
+                    priority
+                  />
                 </div>
                 <div className="border-t-2 border-gray-400 mt-4 w-full" />
               </div>
 
-              <ul className="mt-4 text-center flex flex-col md:text-left gap-4">
+              <ul className="mt-4 text-center flex flex-col md:text-left gap-4 ">
                 {variant.features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="text-[#86868B] text-sm font-semibold md:text-lg lg:text-xl"
-                  >
+                  <li key={idx} className="text-[#86868B] text-sm font-semibold md:text-lg lg:text-xl">
                     {feature}
                   </li>
                 ))}
