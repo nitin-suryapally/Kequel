@@ -1,5 +1,6 @@
 import { Logo } from "@/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -8,10 +9,9 @@ const Navbar = () => {
         <Image src={Logo} width={58} height={42} priority alt="main logo" />
 
         <button className="px-6 py-2 bg-black text-white rounded-3xl font-medium font-primary text-sm sm:text-base  ">
-          KICKSTARTER
+          <Link href="#">KICKSTARTER</Link>
         </button>
       </div>
-      
     </nav>
   );
 };

@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     fontFamily: {
       primary: "var(--font-monserrat)",
-      secondary:"var(--font-poppins)"
+      secondary: "var(--font-poppins)",
+      display: "var(--font-tristan)",
+      inter: "var(--font-inter)",
     },
     extend: {
       backgroundImage: {

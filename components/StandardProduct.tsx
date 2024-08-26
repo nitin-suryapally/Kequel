@@ -17,10 +17,10 @@ const StandardProduct = () => {
         </div>
 
         <div className="w-full md:w-1/2 px-4 md:px-8 mt-6 md:mt-0 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 font-primary">
             Standard Kequel Bedside Table
           </h2>
-          <p className="text-base md:text-lg text-[#1D1D1F] mb-6">
+          <p className="text-base font-primary md:text-lg text-[#1D1D1F] mb-6">
             The Kequel Standard Bedside Table supports 6 modules, features
             ambient and motion detection lights, and includes a smart storage
             compartment, seamlessly blending technology with convenience for a

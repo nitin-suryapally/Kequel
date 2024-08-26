@@ -1,69 +1,115 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
-import Images from "./ui/Images";
-import Dots from "./ui/Dots";
+import React, { useState } from "react";
+import Image from "next/image";
 
 const imgs = [
-  "./images/Image1.svg",
-  "./images/Image2.svg",
-  "./images/Image3.svg",
-  "./images/Image4.svg",
-  "./images/Image5.svg",
+  "/images/Image1.svg",
+  "/images/Image2.svg",
+  "/images/Image3.svg",
+  "/images/Image4.svg",
+  "/images/Image5.svg",
 ];
 
-const ONE_SECOND = 1000;
-const AUTO_DELAY = ONE_SECOND * 3;
-const DRAG_BUFFER = 50;
+const FullScreenCarousel: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const SPRING_OPTIONS = {
-  type: "spring",
-  mass: 3,
-  stiffness: 400,
-  damping: 50,
-};
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === imgs.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-const DraggableCarousel: React.FC = () => {
-  const [imgIndex, setImgIndex] = useState<number>(0);
-  const dragX = useMotionValue(0);
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? imgs.length - 1 : prevIndex - 1
+    );
+  };
 
-  useEffect(() => {
-    const intervalRef = setInterval(() => {
-      const x = dragX.get();
-      if (x === 0) {
-        setImgIndex((prev) => (prev === imgs.length - 1 ? 0 : prev + 1));
-      }
-    }, AUTO_DELAY);
-
-    return () => clearInterval(intervalRef);
-  }, [dragX]);
-
-  const onDragEnd = () => {
-    const x = dragX.get();
-
-    if (x <= -DRAG_BUFFER && imgIndex < imgs.length - 1) {
-      setImgIndex((prev) => prev + 1);
-    } else if (x >= DRAG_BUFFER && imgIndex > 0) {
-      setImgIndex((prev) => prev - 1);
-    }
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
   };
 
   return (
-    <div className="relative overflow-hidden py-4 items-center bg-slate-300 rounded-2xl max-w-7xl w-full">
-      <motion.div
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        style={{ x: dragX }}
-        animate={{ translateX: `-${imgIndex * 100}%` }}
-        transition={SPRING_OPTIONS}
-        onDragEnd={onDragEnd}
-        className="flex cursor-grab items-center active:cursor-grabbing w-full md:w-[80%]"
+    <div className="relative w-full max-w-7xl flex flex-col  ">
+      <div className=" w-full h-[30vh] md:h-[70vh] lg:h-[80vh]">
+        {imgs.map((img, index) => (
+          <div
+            key={index}
+            className={`${
+              index === currentIndex ? "block" : "hidden"
+            } w-full h-full duration-700 ease-in-out`}
+          >
+            <Image
+              src={img}
+              alt={`Slide ${index + 1}`}
+              width={1280}
+              height={570}
+              className=" w-full h-full "
+              priority={index === currentIndex}
+            />
+          </div>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        onClick={handlePrev}
+        className="absolute top-1/2 left-3 z-30 flex justify-center items-center p-2 cursor-pointer group focus:outline-none transform -translate-y-1/2"
       >
-        <Images imgIndex={imgIndex} />
-      </motion.div>
-      <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
+        <span className="inline-flex justify-center items-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white">
+          <svg
+            className="w-6 h-6 text-black"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={handleNext}
+        className="absolute top-1/2 right-3 z-30 flex justify-center items-center p-2 cursor-pointer group focus:outline-none transform -translate-y-1/2"
+      >
+        <span className="inline-flex justify-center items-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white">
+          <svg
+            className="w-6 h-6 text-black"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </span>
+      </button>
+
+      <div className="flex justify-center space-x-3 mt-4 z-10">
+        {imgs.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full ${
+              index === currentIndex ? "bg-gray-400" : "bg-black"
+            }`}
+            aria-label={`Slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default DraggableCarousel;
+export default FullScreenCarousel;

@@ -12,9 +12,9 @@ const Hero = () => {
             width={113}
             height={50}
             priority
-            className="w-14 h-8 lg:w-[113px] lg:h-[50px]"
+            className=" w-12  md:w-14 md:h-8 lg:w-[113px] lg:h-[50px]"
           />
-          <div className="h-8 md:h-12 w-[2px] md:w-1 bg-black"></div>
+          <div className="h-6  md:h-12 w-[2px] md:w-1 bg-black"></div>
           Modular Customizable Bedside Table
         </h1>
 
@@ -31,7 +31,7 @@ const Hero = () => {
           </button>
         </div>
 
-        <p className="flex flex-wrap items-center text-[8px] md:text-xs lg:text-base gap-1 font-secondary">
+        <p className="flex flex-wrap items-center text-[8px] md:text-xs lg:text-base gap-1 font-inter">
           <span>We’re live on</span>
           <Image
             src={KickerStarter}
@@ -39,7 +39,7 @@ const Hero = () => {
             width={101}
             height={11}
             priority
-            className="h-3 w-14 sm:h-5 sm:w-20 md:h-6 md:w-24"
+            className="h-2 w-14 sm:h-5 sm:w-20 md:h-6 md:w-24"
           />
           <span>Support us by visiting our product website.</span>
         </p>
