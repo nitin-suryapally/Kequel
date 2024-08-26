@@ -10,18 +10,22 @@ import Image from "next/image";
 import Link from "next/link";
 
 const socialIcons = [
-  { src: facebook, alt: "Facebook", link: "https://facebook.com" },
+  // { src: facebook, alt: "Facebook", link: "https://facebook.com" },
+  // {
+  //   src: kickstartIcon,
+  //   alt: "Kickstarter",
+  //   link: "https://kickstarter.com",
+  // },
+  // { src: twitterIcon, alt: "Twitter", link: "https://twitter.com" },
   {
-    src: kickstartIcon,
-    alt: "Kickstarter",
-    link: "https://kickstarter.com",
+    src: linkedinIcon,
+    alt: "LinkedIn",
+    link: "https://www.linkedin.com/company/kequel/",
   },
-  { src: twitterIcon, alt: "Twitter", link: "https://twitter.com" },
-  { src: linkedinIcon, alt: "LinkedIn", link: "https://linkedin.com" },
   {
     src: instagrameIcon,
     alt: "Instagram",
-    link: "https://instagram.com",
+    link: "https://www.instagram.com/kequelsmartfurniture?igsh=MXBzbGFtY290OHdicQ==",
   },
   { src: youtubeIcon, alt: "YouTube", link: "https://youtube.com" },
 ];
@@ -37,7 +41,13 @@ const SocialMediaIcons = () => {
           rel="noopener noreferrer"
           className="hover:opacity-75 transition-opacity duration-300"
         >
-          <Image src={icon.src} alt={icon.alt} width={24} height={24} className="w-3 h-3 md:w-8 md:h-8"/>
+          <Image
+            src={icon.src}
+            alt={icon.alt}
+            width={24}
+            height={24}
+            className="w-3 h-3 md:w-8 md:h-8"
+          />
         </Link>
       ))}
     </div>
