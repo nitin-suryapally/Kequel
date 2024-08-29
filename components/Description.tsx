@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Description = () => {
   return (
-    <section className="container flex flex-col gap-2 md:gap-4 max-w-7xl">
+    <section className="container flex flex-col gap-2 md:gap-4 max-w-7xl mb-4 sm:mb-0">
       <Image
         src={doubleQuote}
         alt="Double quote"

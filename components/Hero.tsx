@@ -4,7 +4,7 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <section className="flex flex-col items-center justify-between sm:flex-row sm:items-start sm:mt-8 md:mt-16 max-w-7xl ">
-      <div className="w-full sm:max-w-2xl flex flex-col items-center sm:items-start space-y-4 md:space-y-6 lg:space-y-8">
+      <div className="w-full sm:max-w-2xl custom-container">
         <h1 className="flex gap-2 md:gap-4 font-medium font-primary items-center text-xs md:text-base lg:text-2xl">
           <Image
             src={Kequel}

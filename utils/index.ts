@@ -29,6 +29,14 @@ export interface Iproduct {
   image: StaticImageData;
 }
 
+export const imgs = [
+  CarouselImage1,
+  CarouselImage2,
+  CarouselImage3,
+  CarouselImage4,
+  CarouselImage5,
+];
+
 export const product = [
   {
     id: 1,

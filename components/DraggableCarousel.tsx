@@ -1,112 +1,65 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
-import { CarouselImage1, CarouselImage2, CarouselImage3, CarouselImage4, CarouselImage5 } from "@/utils";
-
-const imgs = [
-  CarouselImage1,
-  CarouselImage2,
-  CarouselImage3,
-  CarouselImage4,
-  CarouselImage5
-];
+import { imgs } from "@/utils";
 
 const DraggableCarousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const len = imgs.length;
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === imgs.length - 1 ? 0 : prevIndex + 1
-    );
+  const prevSlide = (): void => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + len) % len);
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? imgs.length - 1 : prevIndex - 1
-    );
+  const nextSlide = (): void => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % len);
   };
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  useEffect(() => {
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        nextSlide();
+      }, 3000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [isHovered]);
 
   return (
-    <div className="relative w-full max-w-7xl flex flex-col  ">
-      <div className=" w-full h-[30vh] md:h-[70vh] lg:h-[80vh]">
-        {imgs.map((img, index) => (
+    <div className="relative w-full mx-auto mt-4">
+      <div className="relative w-full h-full xs:h-[250px] sm:h-[300px] md:h-[560px] mx-autp group hover:-translate-y-2">
+        <Image
+          src={imgs[currentIndex].src}
+          alt={`Slider Image ${currentIndex + 1}`}
+          width={1312}
+          height={560}
+          className="rounded-xl w-full h-full transition-all duration-200 ease-in-out cursor-pointer "
+        />
+      </div>
+      <button
+        className="absolute left-1 md:left-2 top-1/2 transform -translate-y-1/2 p-2 md:p-4 rounded-full bg-gray-400 text-black group focus:outline-none"
+        onClick={prevSlide}
+      >
+        <FaChevronLeft className="text-black md:text-xl" />
+      </button>
+      <button
+        className="absolute right-1 md:right-2 top-1/2 transform -translate-y-1/2 p-2 md:p-4 rounded-full bg-gray-400 text-black group focus:outline-none"
+        onClick={nextSlide}
+      >
+        <FaChevronRight className="text-black md:text-xl" />
+      </button>
+      <div className="flex justify-center mt-4">
+        {imgs.map((_, index) => (
           <div
             key={index}
-            className={`${
-              index === currentIndex ? "block" : "hidden"
-            } w-full h-full duration-700 ease-in-out`}
-          >
-            <Image
-              src={img}
-              alt={`Slide ${index + 1}`}
-              width={1280}
-              height={570}
-              className=" w-full h-full "
-              priority
-            />
-          </div>
-        ))}
-      </div>
-
-      <button
-        type="button"
-        onClick={handlePrev}
-        className="absolute top-1/2 left-3 z-30 flex justify-center items-center p-2 cursor-pointer group focus:outline-none transform -translate-y-1/2"
-      >
-        <span className="inline-flex justify-center items-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white">
-          <svg
-            className="w-6 h-6 text-black"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-        </span>
-      </button>
-      <button
-        type="button"
-        onClick={handleNext}
-        className="absolute top-1/2 right-3 z-30 flex justify-center items-center p-2 cursor-pointer group focus:outline-none transform -translate-y-1/2"
-      >
-        <span className="inline-flex justify-center items-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white">
-          <svg
-            className="w-6 h-6 text-black"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-        </span>
-      </button>
-
-      <div className="flex justify-center space-x-3 mt-4 z-10">
-        {imgs.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-gray-400" : "bg-black"
-            }`}
-            aria-label={`Slide ${index + 1}`}
-          />
+            className={` h-2 w-2 sm:h-3 sm:w-3 mx-1 rounded-full ${
+              index === currentIndex ? "bg-gray-600 " : "bg-black"
+            } transition-all duration-500 ease-in-out`}
+          ></div>
         ))}
       </div>
     </div>
